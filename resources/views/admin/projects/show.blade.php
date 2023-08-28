@@ -7,9 +7,14 @@
             #{{$project->id}} - {{$project->title}} - {{$project->type->name}}
         </div>
 
-        <div class="card-header">
-            #{{$project->id}} - {{$project->title}} - {{$project->type->name}}
-        </div>
+        @if ( count($project->technologies) > 0)
+            <h5 class="card-header">
+                <!-- @dump($project->technologies) -->
+                @foreach ($project->technologies as $technology)
+                    {{ $technology->name }}
+                @endforeach
+            </h5>
+        @endif
 
         
         <div class="card-body">
