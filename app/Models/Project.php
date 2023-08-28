@@ -19,7 +19,6 @@ class Project extends Model
         'type',
         'created_date',
         'image',
-        'technology_id'
     ];
 
     public function type(){
