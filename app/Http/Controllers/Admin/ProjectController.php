@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Project;
+use App\Models\Type;
+use App\Models\Technology;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Storage;
 
@@ -28,8 +30,10 @@ class ProjectController extends Controller
     public function create()
     {
         //
+        $types = Type::all();
+        $technologies = Technology::all();
 
-        return view('admin.projects.create');
+        return view('admin.projects.create', compact('types', 'technologies'));
     }
 
     /**
@@ -43,9 +47,10 @@ class ProjectController extends Controller
             'title' => ['required', 'unique:projects', 'min:6'],
             'description' => ['max:500'],
             'type' => ['required'],
-            'language' => ['required'],
+            'category' => ['required'],
             'created_date' => ['required'],
             'image' => ['image'],
+            'technologies' => ['exists:technologies,id'],
             'type_id' => ['required'],
         ]);
 
@@ -55,7 +60,11 @@ class ProjectController extends Controller
         $newProject = Project::create($data);
         $newProject->save();
 
-        return redirect()->route('admin.projects.index');
+        if ($request->has('technologies')){
+            $newProject->technologies()->sync( $request->technologies);
+        }
+
+        return redirect()->route('admin.projects.show', $newProject);
 
         // $data = $request-> all();
 
@@ -82,8 +91,9 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
+        $technologies = Technology::all();
         $types = Type::all();
-        return view('admin.projects.edit', compact('project', 'types'));
+        return view('admin.projects.edit', compact('project', 'types', 'technologies'));
     }
 
     /**
@@ -96,11 +106,20 @@ class ProjectController extends Controller
             'title' => ['required', 'unique:projects', 'min:6', Rule::unique('projects')->ignore($project->id)],
             'description' => ['max:500'],
             'type' => ['required'],
-            'language' => ['required'],
+            'category' => ['required'],
             'created_date' => ['required'],
+            'technologies' => ['exists:technologies,id'],
             'type_id' => ['required'],
         ]);
+
+        $img_path = Storage::put('uploads', $request['image']);
+        $data['image'] = $img_path;
+
         $project->update($data);
+
+        if ($request->has('technologies')){
+            $newProject->technologies()->sync( $request->technologies);
+        }
         return redirect()->route('admin.projects.index', compact('project'));
 
     }
