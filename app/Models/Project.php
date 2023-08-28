@@ -19,6 +19,7 @@ class Project extends Model
         'type',
         'created_date',
         'image',
+        'technology_id'
     ];
 
     public function type(){
@@ -26,6 +27,6 @@ class Project extends Model
     }
 
     public function technologies(){
-        return $this->hasMany(Technology::class);
+        return $this->belongsToMany(Technology::class);
     }
 }
