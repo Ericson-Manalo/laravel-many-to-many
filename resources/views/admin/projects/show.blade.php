@@ -7,6 +7,10 @@
             #{{$project->id}} - {{$project->title}} - {{$project->type->name}}
         </div>
 
+        <div class="card-header">
+            #{{$project->id}} - {{$project->title}} - {{$project->type->name}}
+        </div>
+
         
         <div class="card-body">
             <h5 class="card-title">
@@ -18,7 +22,7 @@
             <img src="{{asset('storage/' . $project->image)}}" alt="{{$project->image}}">
                 
             <p class="card-text">
-                {{$project->category}} - {{$project->language}}
+                {{$project->category}} 
             </p>
             <div class="card-footer text-muted">
                 {{$project->created_date}}

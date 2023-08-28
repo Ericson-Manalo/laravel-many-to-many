@@ -48,22 +48,7 @@
         <label for="language" class="form-label">Language</label>
         <input type="text" class="form-control" id="language" name="language">
     </div> -->
-    <div class="form-group">
-        <label for="language" class="form-label">Language</label>
-            <div class="col-md-10 inputGroupContainer">
-                <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-file-code-o"></i></span>
-                    <select class="form-control" id="language" name="language" >
-                        <option>PHP</option>
-                        <option>Hack</option>
-                        <option>Vue</option>
-                        <option>CSS</option>
-                        <option>HTML</option>
-                        <option>Javascript</option>
-                    </select>
-                </div>
-            </div>
-    </div>
+    
     <div class="mb-3">
         <label for="created_date" class="form-label">Date of creation</label>
         <input type="date" class="form-control" id="created_date" name="created_date" value="{{old ('created_date', $project->created_date)}}">

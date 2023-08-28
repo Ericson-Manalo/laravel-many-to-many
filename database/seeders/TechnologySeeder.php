@@ -14,7 +14,14 @@ class TechnologySeeder extends Seeder
     public function run(): void
     {
         //
-        $technologies = ['Windows', 'MAC OS', 'Unix', 'Linux', 'Ubuntu', 'DOS', 'Mac OS X'];
+        $technologies = [
+            "PHP",
+            "Hack",
+            "Vue",
+            "CSS",
+            "HTML",
+            "Javascript",
+        ];
 
         foreach ($technologies as $technology){
             $newTechnology = new Technology();

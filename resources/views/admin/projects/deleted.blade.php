@@ -9,7 +9,6 @@
                 <th scope="col">Project's Title</th>
                 <th scope="col">Description</th>
                 <th scope="col">Type</th>
-                <th scope="col">Language used</th>
                 <th scope="col">Data created</th>
                 <th scope="col">Settings</th>
 
@@ -30,9 +29,7 @@
                 <td>
                     {{$project->category}}
                 </td>
-                <td>
-                    {{$project->language}}
-                </td>
+
                 <td>
                     {{$project->created_date}}
                 </td>
