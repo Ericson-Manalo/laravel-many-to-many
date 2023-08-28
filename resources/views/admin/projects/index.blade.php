@@ -8,7 +8,7 @@
                 <th scope="col">#ID</th>
                 <th scope="col">Project's Title</th>
                 <th scope="col">Description</th>
-                <th scope="col">Type</th>
+                <th scope="col">Category</th>
                 <th scope="col">Language used</th>
                 <th scope="col">Data created</th>
                 <th scope="col">Settings</th>
