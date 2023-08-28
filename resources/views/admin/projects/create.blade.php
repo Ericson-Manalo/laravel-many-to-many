@@ -5,6 +5,8 @@
     <form action="{{ route('admin.projects.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
 
+
+                <!-- @dump($technologies) -->
                 
     @error('title')
         <div class="error">{{ $message }}</div>
@@ -23,6 +25,24 @@
         <input type="file" class="form-control" id="image" name="image" placeholder="Insert you image">
     </div>
 
+    @error('technology_id')
+        <div class="alert alert-danger">{{ $message }}</div>
+    @enderror
+    <div class="mb-3">
+        <label for="technologies" class="form-label mt-4">
+            Technology
+        </label>
+        <div>
+        @foreach ($technologies as $technology)
+            <input type="checkbox" class="form-check-input ms-5" id="technologies" name="technologies[]" value="{{$technology->id}}">
+            <label for="technologies" class="form-label">
+                {{$technology->name}}
+            </label>
+        @endforeach
+        </div>
+    </div>
+
+
     <div class="mb-3">
         <label for="description" class="form-label">Description</label>
         <textarea name="description" id="description" cols="95 "rows="10"></textarea>
@@ -32,11 +52,11 @@
         <input type="text" class="form-control" id="type" name="type">
     </div> -->
     <div class="form-group">
-        <label for="type" class="form-label">Type</label>
+        <label for="category" class="form-label">Category</label>
             <div class="col-md-10 inputGroupContainer">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-file-code-o"></i></span>
-                    <select class="form-control" id="type" name="type">
+                    <select class="form-control" id="category" name="category">
                         <option>Public</option>
                         <option>Private</option>
                         <option>Sources</option>
@@ -53,22 +73,7 @@
         <label for="language" class="form-label">Language</label>
         <input type="text" class="form-control" id="language" name="language">
     </div> -->
-    <div class="form-group">
-        <label for="language" class="form-label">Language</label>
-            <div class="col-md-10 inputGroupContainer">
-                <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-file-code-o"></i></span>
-                    <select class="form-control" id="language" name="language">
-                        <option>PHP</option>
-                        <option>Hack</option>
-                        <option>Vue</option>
-                        <option>CSS</option>
-                        <option>HTML</option>
-                        <option>Javascript</option>
-                    </select>
-                </div>
-            </div>
-    </div>
+    
     <div class="mb-3">
         <label for="created_date" class="form-label">Date of creation</label>
         <input type="date" class="form-control" id="created_date" name="created_date">

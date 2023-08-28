@@ -15,6 +15,26 @@
         <input type="text" class="form-control" id="title" name="title" value="{{ old( 'title', $project->title)}}">
     </div>
 
+    @error('technologies_id')
+        <div class="alert alert-danger">{{ $message }}</div>
+    @enderror
+    <div class="mb-5">
+        <label for="technologies" class="form-label">
+            Tags
+        </label>
+
+        <div>
+            @foreach ($technologies as $technology)
+                <input type="checkbox" name="technologies[]" class="form-check-input" id="technologies" value="{{ $technology->id }}">
+                <label for="technologies" class="form-check-label me-3">
+                    {{ $technology->name }}
+                </label>
+            @endforeach
+        </div>
+    </div>
+
+
+
     @error('description')
         <div class="error">{{ $message }}</div>
     @enderror     
