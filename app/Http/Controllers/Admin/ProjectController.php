@@ -57,7 +57,7 @@ class ProjectController extends Controller
         $data['image'] = $img_path;
 
         $newProject = Project::create($data);
-        $newProject->save();
+
 
         if ($request->has('technologies')){
             $newProject->technologies()->sync( $request->technologies);
