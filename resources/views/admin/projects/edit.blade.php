@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="col-7 m-auto mt-5">
-    <form action="{{ route('admin.projects.update', $project) }}" method="POST enctype="multipart/form-data">
+    <form action="{{ route('admin.projects.update', $project) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
 
