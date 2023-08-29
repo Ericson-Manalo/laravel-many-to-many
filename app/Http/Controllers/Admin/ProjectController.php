@@ -46,12 +46,11 @@ class ProjectController extends Controller
         $data = $request->validate([
             'title' => ['required', 'unique:projects', 'min:6'],
             'description' => ['max:500'],
-            'type' => ['required'],
             'category' => ['required'],
             'created_date' => ['required'],
             'image' => ['image'],
             'technologies' => ['exists:technologies,id'],
-            'type_id' => ['required'],
+            'type_id' => ['required', 'types,id']
         ]);
 
         $img_path = Storage::put('uploads', $request['image']);
@@ -105,11 +104,10 @@ class ProjectController extends Controller
         $data = $request->validate([
             'title' => ['required', 'unique:projects', 'min:6', Rule::unique('projects')->ignore($project->id)],
             'description' => ['max:500'],
-            'type' => ['required'],
             'category' => ['required'],
             'created_date' => ['required'],
             'technologies' => ['exists:technologies,id'],
-            'type_id' => ['required'],
+            'type_id' => ['required', 'types,id']
         ]);
 
         $img_path = Storage::put('uploads', $request['image']);
@@ -118,7 +116,7 @@ class ProjectController extends Controller
         $project->update($data);
 
         if ($request->has('technologies')){
-            $newProject->technologies()->sync( $request->technologies);
+            $project->technologies()->sync( $request->technologies);
         }
         return redirect()->route('admin.projects.index', compact('project'));
 
