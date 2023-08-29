@@ -45,7 +45,7 @@
     @enderror
     <div class="mb-5">
         <label for="technologies" class="form-label">
-            Tags
+            Technology
         </label>
 
         <div>
