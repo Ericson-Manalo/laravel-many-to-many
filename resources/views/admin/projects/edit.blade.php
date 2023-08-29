@@ -15,6 +15,31 @@
         <input type="text" class="form-control" id="title" name="title" value="{{ old( 'title', $project->title)}}">
     </div>
 
+    @error('image')
+        <div class="error">{{ $message }}</div>
+    @enderror     
+
+    <div class="mb-3">
+        <label for="image" class="form-label">Image</label>
+        <input type="file" class="form-control" id="image" name="image" placeholder="Insert you image">
+    </div>
+
+    @error('type_id')
+        <div class="alert alert-danger">{{ $message }}</div>
+    @enderror
+        <div class="mb-5">
+            <label for="type_id" class="form-label">
+                Category
+            </label>
+            <select class='form-select' name="type_id" id="type_id">
+                @foreach ($types as $type)
+                    <option value="{{ $type->id }}" {{ old('type_id') == $type->id ? 'selected' : '' }}>
+                        {{ $type->name }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+
     @error('technologies_id')
         <div class="alert alert-danger">{{ $message }}</div>
     @enderror
