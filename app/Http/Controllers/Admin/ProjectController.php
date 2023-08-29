@@ -114,15 +114,19 @@ class ProjectController extends Controller
 
         ]);
 
-        $img_path = Storage::put('uploads', $request['image']);
-        $data['image'] = $img_path;
+        if ($request->hasFile('image')){
+            Storage::delete($post->image);
+            $img_path = Storage::put('uploads', $request['image']);
+            $data['image'] = $img_path;
+        }
+
 
         $project->update($data);
 
         if ($request->has('technologies')){
             $project->technologies()->sync( $request->technologies);
         }
-        return redirect()->route('admin.projects.index', compact('project'));
+        return redirect()->route('admin.projects.show', compact('project'));
 
     }
 
