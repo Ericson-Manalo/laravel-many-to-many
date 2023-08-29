@@ -50,7 +50,7 @@ class ProjectController extends Controller
             'created_date' => ['required'],
             'image' => ['image'],
             'technologies' => ['exists:technologies,id'],
-            'type_id' => ['required', 'types,id']
+            'type_id' => ['required', 'exists:types,id']
         ]);
 
         $img_path = Storage::put('uploads', $request['image']);
@@ -63,7 +63,7 @@ class ProjectController extends Controller
             $newProject->technologies()->sync( $request->technologies);
         }
 
-        return redirect()->route('admin.projects.show', $newProject);
+        return redirect()->route('admin.projects.index', $newProject);
 
         // $data = $request-> all();
 
@@ -101,13 +101,17 @@ class ProjectController extends Controller
     public function update(Request $request, Project $project)
     {
         //
+        // dd($request->all());
+
         $data = $request->validate([
             'title' => ['required', 'unique:projects', 'min:6', Rule::unique('projects')->ignore($project->id)],
             'description' => ['max:500'],
             'category' => ['required'],
             'created_date' => ['required'],
+            'image' => ['image'],
             'technologies' => ['exists:technologies,id'],
-            'type_id' => ['required', 'types,id']
+            'type_id' => ['required', 'exists:types,id']
+
         ]);
 
         $img_path = Storage::put('uploads', $request['image']);
