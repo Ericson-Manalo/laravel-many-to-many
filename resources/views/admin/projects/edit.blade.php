@@ -21,7 +21,7 @@
 
     <div class="mb-3">
         <label for="image" class="form-label">Image</label>
-        <input type="file" class="form-control" id="image" name="image" placeholder="Insert you image">
+        <input type="file" class="form-control" id="image" name="image" placeholder="Insert you image" value="{{ old('image', '')}}">
     </div>
 
     @error('type_id')
